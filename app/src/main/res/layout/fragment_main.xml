@@ -38,8 +38,15 @@
         android:id="@+id/btn_flat_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="observableFlatMap"
         android:text="Observable flatMap()"
+        android:textAllCaps="false"/>
+
+
+    <Button
+        android:id="@+id/btn_token"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Http Request With Token"
         android:textAllCaps="false"/>
 
 </LinearLayout>

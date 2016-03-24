@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AwesomeRxJava</string>
+
+    <string name="create_operator">This sample demonstrate `create` ,`just` and `from` operators.</string>
+
+    <string name="flat_map">This sample demonstrate flatMap usage. How to get IPs from hosts. \n
+        The task of getting IPs was executed in work thread. Consuming final result in main thread.</string>
+
+    <string name="map">This sample demonstrate usage of map operator.
+        Including the operator of flatMap use case and demonstrating how to transform data by map operator </string>
+
+
 </resources>

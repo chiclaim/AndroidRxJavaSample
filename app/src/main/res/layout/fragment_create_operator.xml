@@ -5,9 +5,17 @@
               android:background="@android:color/white"
               android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/create_operator"
+        android:textSize="14sp"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1">
 
         <TextView
@@ -15,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Click Button To Test 'Create Operator'\n"
-            android:textSize="14sp"/>
+            android:textSize="12sp"/>
     </ScrollView>
 
     <LinearLayout

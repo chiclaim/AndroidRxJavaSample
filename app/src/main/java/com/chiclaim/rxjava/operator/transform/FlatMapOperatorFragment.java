@@ -1,6 +1,5 @@
 package com.chiclaim.rxjava.operator.transform;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -34,7 +33,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_map_operator, container, false);
+        return inflater.inflate(R.layout.fragment_flatmap_operator, container, false);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
         tvLogs = (TextView) view.findViewById(R.id.tv_logs);
     }
 
-    private Observable<String> processUrlsIpByOneMap() {
+    private Observable<String> processUrlIpByOneFlatMap() {
         return Observable.just(
                 "http://www.baidu.com/",
                 "http://www.google.com/",
@@ -52,7 +51,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
                 .flatMap(new Func1<String, Observable<String>>() {
                     @Override
                     public Observable<String> call(String s) {
-                        return getIp(s);
+                        return createIpObservable(s);
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -60,7 +59,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
     }
 
 
-    private Observable<String> processUrlIpByTwoMap() {
+    private Observable<String> processUrlIpByTwoFlatMap() {
         return Observable.just(
                 "http://www.baidu.com/",
                 "http://www.google.com/",
@@ -75,7 +74,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
                 .flatMap(new Func1<String, Observable<String>>() {
                     @Override
                     public Observable<String> call(String s) {
-                        return getIp(s);
+                        return createIpObservable(s);
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -83,7 +82,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
     }
 
     private void returnIpByList() {
-        processUrlIpByTwoMap()
+        processUrlIpByTwoFlatMap()
                 .toList() //to list
                 .subscribe(new Action1<List<String>>() {
                     @Override
@@ -99,17 +98,20 @@ public class FlatMapOperatorFragment extends BaseFragment {
     }
 
     private void returnIpOneByOne() {
-        processUrlIpByTwoMap().subscribe(new Action1<String>() {
-            @Override
-            public void call(String s) {
-                printLog(tvLogs, "Consume Data <- ", s);
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-                printErrorLog(tvLogs, "throwable call()", throwable.getMessage());
-            }
-        });
+
+        processUrlIpByTwoFlatMap()
+                //processUrlIpByOneFlatMap()
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        printLog(tvLogs, "Consume Data <- ", s);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        printErrorLog(tvLogs, "throwable call()", throwable.getMessage());
+                    }
+                });
     }
 
 
@@ -118,9 +120,14 @@ public class FlatMapOperatorFragment extends BaseFragment {
      */
     private void observableFlatMap() {
         //==============把ip作为list返回
-//        returnIpByList();
+        returnIpByList();
         //===============单个的返回
-        returnIpOneByOne();
+        //returnIpOneByOne();
+
+        //@TODO 如果某个url获取ip失败,该url之后的url都不会去获取ip了.原因(官方注释):
+        //If the Observable calls this method (onError), it will not thereafter call onNext or onCompleted.
+
+        //@TODO 可以不调用subscriber.onError(e);或者调用subscriber.onNext(your value);
     }
 
 
@@ -134,21 +141,22 @@ public class FlatMapOperatorFragment extends BaseFragment {
     }
 
 
-    private Observable<String> getIp(final String url) {
+    private Observable<String> createIpObservable(final String url) {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
-
                 try {
                     String ip = getIPByUrl(url);
                     subscriber.onNext(ip);
                     printLog(tvLogs, "Emit Data -> ", ip);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
-                    subscriber.onError(e);
+                    //subscriber.onError(e);
+                    subscriber.onNext(null);
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
-                    subscriber.onError(e);
+                    //subscriber.onError(e);
+                    subscriber.onNext(null);
                 }
                 subscriber.onCompleted();
             }
