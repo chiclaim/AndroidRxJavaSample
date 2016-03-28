@@ -15,7 +15,6 @@ import com.chiclaim.rxjava.api.UserApi;
 import com.chiclaim.rxjava.exception.AccessDenyException;
 import com.chiclaim.rxjava.model.AuthToken;
 
-import okhttp3.ResponseBody;
 import retrofit.client.Response;
 import retrofit.mime.TypedByteArray;
 import rx.Observable;
@@ -50,7 +49,7 @@ public class HttpWithTokenFragment extends BaseFragment {
     }
 
 
-    public Observable<AuthToken> refreshToken() {
+    public Observable<AuthToken> createTokenObvervable() {
         return Observable.create(new Observable.OnSubscribe<AuthToken>() {
             @Override
             public void call(Subscriber<? super AuthToken> observer) {
@@ -74,7 +73,7 @@ public class HttpWithTokenFragment extends BaseFragment {
                 throwable.printStackTrace();
                 // Here check if the error thrown really is a 401
                 if (isHttp401Error(throwable)) {
-                    return refreshToken().flatMap(new Func1<AuthToken, Observable<? extends T>>() {
+                    return createTokenObvervable().flatMap(new Func1<AuthToken, Observable<? extends T>>() {
                         @Override
                         public Observable<? extends T> call(AuthToken token) {
                             appendText(tvLogs, "refresh token success,token's validity is 10s\nResume last request");

@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chiclaim.rxjava.operator.HttpWithTokenFragment;
+import com.chiclaim.rxjava.operator.SearchDebounceFragment;
 import com.chiclaim.rxjava.operator.create.CreateOperatorFragment;
 import com.chiclaim.rxjava.operator.transform.FlatMapOperatorFragment;
 import com.chiclaim.rxjava.operator.transform.MapOperatorFragment;
+import com.chiclaim.rxjava.operator.transform.ConcatFlatMapFragment;
 
 public class MainFragment extends BaseFragment implements View.OnClickListener {
 
@@ -27,6 +29,10 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.btn_map).setOnClickListener(this);
         view.findViewById(R.id.btn_flat_map).setOnClickListener(this);
         view.findViewById(R.id.btn_token).setOnClickListener(this);
+        view.findViewById(R.id.btn_search_debounce).setOnClickListener(this);
+        view.findViewById(R.id.btn_flat_switch_concat_map).setOnClickListener(this);
+
+
     }
 
 
@@ -44,6 +50,12 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_token:
                 addFragment(new HttpWithTokenFragment());
+                break;
+            case R.id.btn_search_debounce:
+                addFragment(new SearchDebounceFragment());
+                break;
+            case R.id.btn_flat_switch_concat_map:
+                addFragment(new ConcatFlatMapFragment());
                 break;
         }
     }

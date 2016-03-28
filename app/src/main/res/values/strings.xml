@@ -9,5 +9,8 @@
     <string name="map">This sample demonstrate usage of map operator.
         Including the operator of flatMap use case and demonstrating how to transform data by map operator </string>
 
+    <string name="compare_flatmap_concatmap">This sample demonstrate what difference between flatmap and concatmap.
+        </string>
+
 
 </resources>

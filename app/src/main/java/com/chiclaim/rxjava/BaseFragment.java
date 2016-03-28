@@ -50,6 +50,16 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
                 .commit();
     }
 
+
+    protected boolean isMain() {
+        return Looper.myLooper() == Looper.getMainLooper();
+    }
+
+    protected String getMainText(String flag) {
+        return flag + " is main thread : " + (Looper.myLooper() == Looper.getMainLooper());
+
+    }
+
     @Override
     public void onClick(View v) {
 
