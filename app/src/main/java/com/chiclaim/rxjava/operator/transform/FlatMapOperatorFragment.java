@@ -98,7 +98,6 @@ public class FlatMapOperatorFragment extends BaseFragment {
     }
 
     private void returnIpOneByOne() {
-
         processUrlIpByTwoFlatMap()
                 //processUrlIpByOneFlatMap()
                 .subscribe(new Action1<String>() {
