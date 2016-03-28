@@ -46,7 +46,22 @@
         android:id="@+id/btn_token"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Http Request With Token"
+        android:text="Per Http Request With Token"
+        android:textAllCaps="false"/>
+
+
+    <Button
+        android:id="@+id/btn_search_debounce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Debounce"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_flat_switch_concat_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Flat Switch Concat Map Compare"
         android:textAllCaps="false"/>
 
 </LinearLayout>

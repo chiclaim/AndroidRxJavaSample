@@ -33,6 +33,7 @@ dependencies {
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex:rxjava:1.1.2'
 
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
 
 
 
