@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chiclaim.rxjava.operator.CheckCacheFragment;
 import com.chiclaim.rxjava.operator.HttpWithTokenFragment;
 import com.chiclaim.rxjava.operator.ObservableDependencyFragment;
 import com.chiclaim.rxjava.operator.SearchDebounceFragment;
@@ -33,6 +34,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.btn_search_debounce).setOnClickListener(this);
         view.findViewById(R.id.btn_flat_concat_map).setOnClickListener(this);
         view.findViewById(R.id.btn_observable_dependence_on_other_observable).setOnClickListener(this);
+        view.findViewById(R.id.btn_check_cache).setOnClickListener(this);
     }
 
 
@@ -59,6 +61,9 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_observable_dependence_on_other_observable:
                 addFragment(new ObservableDependencyFragment());
+                break;
+            case R.id.btn_check_cache:
+                addFragment(new CheckCacheFragment());
                 break;
         }
     }

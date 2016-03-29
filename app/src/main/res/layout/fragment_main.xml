@@ -83,9 +83,17 @@
             android:text="Observable DependenceOn Other Observable"
             android:textAllCaps="false"/>
 
-        <!-- how to check cache -->
 
-        <!-- how to design an Observable that has to wait for another Observable -->
+
+        <Button
+            android:id="@+id/btn_check_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Check data cache"
+            android:textAllCaps="false"/>
+
+
+        <!-- load data from multiple sources -->
 
     </LinearLayout>
 </ScrollView>
