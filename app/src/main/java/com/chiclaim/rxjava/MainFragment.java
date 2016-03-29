@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chiclaim.rxjava.operator.HttpWithTokenFragment;
+import com.chiclaim.rxjava.operator.ObservableDependencyFragment;
 import com.chiclaim.rxjava.operator.SearchDebounceFragment;
 import com.chiclaim.rxjava.operator.create.CreateOperatorFragment;
 import com.chiclaim.rxjava.operator.transform.FlatMapOperatorFragment;
@@ -30,9 +31,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.btn_flat_map).setOnClickListener(this);
         view.findViewById(R.id.btn_token).setOnClickListener(this);
         view.findViewById(R.id.btn_search_debounce).setOnClickListener(this);
-        view.findViewById(R.id.btn_flat_switch_concat_map).setOnClickListener(this);
-
-
+        view.findViewById(R.id.btn_flat_concat_map).setOnClickListener(this);
+        view.findViewById(R.id.btn_observable_dependence_on_other_observable).setOnClickListener(this);
     }
 
 
@@ -54,10 +54,12 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
             case R.id.btn_search_debounce:
                 addFragment(new SearchDebounceFragment());
                 break;
-            case R.id.btn_flat_switch_concat_map:
+            case R.id.btn_flat_concat_map:
                 addFragment(new ConcatFlatMapFragment());
+                break;
+            case R.id.btn_observable_dependence_on_other_observable:
+                addFragment(new ObservableDependencyFragment());
                 break;
         }
     }
-
 }

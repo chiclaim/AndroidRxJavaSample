@@ -64,7 +64,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
                 "http://www.baidu.com/",
                 "http://www.google.com/",
                 "https://www.bing.com/")
-                .toList()
+                .toList()// if a Observable<list>
                 .flatMap(new Func1<List<String>, Observable<String>>() {
                     @Override
                     public Observable<String> call(List<String> s) {

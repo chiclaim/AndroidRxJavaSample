@@ -13,4 +13,7 @@ public interface SearchApi {
 
     @GET("/search")
     Observable<List<String>> search(@Query("key") String key);
+
+    @GET("/hosts")
+    Observable<List<String>> hosts();
 }

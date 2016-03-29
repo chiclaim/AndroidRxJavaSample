@@ -2,7 +2,7 @@ package com.chiclaim.rxjava.operator.transform;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,9 +114,11 @@ public class ConcatFlatMapFragment extends BaseFragment {
     }
 
 
-    List<String> urls = Arrays.asList("http://www.baidu.com/",
+    List<String> urls = Arrays.asList(
+            "http://www.baidu.com/",
             "http://www.google.com/",
-            "https://www.bing.com/");
+            "https://www.bing.com/",
+            "wrong_http://www.google.com/");
 
     public Observable<String> createUrlObservable() {
         return Observable.from(urls);
@@ -145,10 +147,17 @@ public class ConcatFlatMapFragment extends BaseFragment {
         return createUrlObservable().flatMap(new Func1<String, Observable<String>>() {
             @Override
             public Observable<String> call(String s) {
-                Log.d("call", getMainText("call"));
+                //Log.d("call", getMainText("call"));
                 return createIpObservable(s, false);
             }
-        })/*.subscribeOn(Schedulers.io())*/.observeOn(AndroidSchedulers.mainThread());
+        }).filter(new Func1<String, Boolean>() {
+            //filter data [if result is null or empty ,it will be ignored]
+            @Override
+            public Boolean call(String s) {
+                return !TextUtils.isEmpty(s);
+            }
+        })
+        /*.subscribeOn(Schedulers.io())*/.observeOn(AndroidSchedulers.mainThread());
     }
 
 
@@ -166,7 +175,7 @@ public class ConcatFlatMapFragment extends BaseFragment {
         observable.subscribe(new Action1<String>() {
             @Override
             public void call(String s) {
-                printLog(tvLogs, "Consume Data <- ", s.toString());
+                printLog(tvLogs, "Consume Data <- ", s);
             }
         }, new Action1<Throwable>() {
             @Override

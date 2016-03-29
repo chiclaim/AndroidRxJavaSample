@@ -3,7 +3,6 @@ package com.chiclaim.rxjava.operator;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +15,11 @@ import com.chiclaim.rxjava.R;
 import com.chiclaim.rxjava.api.ApiServiceFactory;
 import com.chiclaim.rxjava.api.SearchApi;
 import com.jakewharton.rxbinding.widget.RxTextView;
-import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
