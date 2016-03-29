@@ -14,6 +14,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -38,7 +39,7 @@ public class CheckCacheFragment extends BaseFragment {
         view.findViewById(R.id.btn_operator).setOnClickListener(this);
     }
 
-    String data[] = {null, "disk", null};
+    String data[] = {"memory", null, null};
     //String data[] = {"memory", "disk",null};
 
     private Observable<String> memorySource = Observable.create(new Observable.OnSubscribe<String>() {
@@ -86,8 +87,17 @@ public class CheckCacheFragment extends BaseFragment {
         switch (v.getId()) {
             case R.id.btn_operator:
                 tvLogs.setText("");
-                Observable.concat(memorySource, diskSource, networkSource).first()
-                        //.subscribeOn(Schedulers.io())
+                Observable.concat(memorySource, diskSource, networkSource)
+                        //first()-> if no data from observables will cause exception :
+                        //java.util.NoSuchElementException: Sequence contains no elements
+                        //takeFirst -> no exception
+                        .takeFirst(new Func1<String, Boolean>() {
+                            @Override
+                            public Boolean call(String s) {
+                                return s != null;
+                            }
+                        })
+                         //.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<String>() {
                             @Override
