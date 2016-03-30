@@ -34,7 +34,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.btn_search_debounce).setOnClickListener(this);
         view.findViewById(R.id.btn_flat_concat_map).setOnClickListener(this);
         view.findViewById(R.id.btn_observable_dependence_on_other_observable).setOnClickListener(this);
-        view.findViewById(R.id.btn_check_cache).setOnClickListener(this);
+        view.findViewById(R.id.btn_multiple_observables).setOnClickListener(this);
     }
 
 
@@ -62,7 +62,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
             case R.id.btn_observable_dependence_on_other_observable:
                 addFragment(new ObservableDependencyFragment());
                 break;
-            case R.id.btn_check_cache:
+            case R.id.btn_multiple_observables:
                 addFragment(new CheckCacheFragment());
                 break;
         }

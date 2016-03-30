@@ -39,14 +39,17 @@ public class CheckCacheFragment extends BaseFragment {
         view.findViewById(R.id.btn_operator).setOnClickListener(this);
     }
 
-    String data[] = {"memory", null, null};
+    String data[] = {null, null, "network"};
+    //String data[] = {null, "disk","network"};
+    //String data[] = {"memory", null,"network"};
     //String data[] = {"memory", "disk",null};
+    //String data[] = {"memory", "disk","network"};
 
     private Observable<String> memorySource = Observable.create(new Observable.OnSubscribe<String>() {
         @Override
         public void call(Subscriber<? super String> subscriber) {
             String d = data[0];
-            printLog(tvLogs, "", "----start check memory data");
+            printLog(tvLogs, "", "----start check memory data. value is null? " + (d == null));
             if (d != null) {
                 subscriber.onNext(d);
             }
@@ -59,7 +62,7 @@ public class CheckCacheFragment extends BaseFragment {
         @Override
         public void call(Subscriber<? super String> subscriber) {
             String d = data[1];
-            printLog(tvLogs, "", "----start check disk data");
+            printLog(tvLogs, "", "----start check disk data. value is null? " + (d == null));
             if (d != null) {
                 subscriber.onNext(d);
             }
@@ -72,7 +75,7 @@ public class CheckCacheFragment extends BaseFragment {
         @Override
         public void call(Subscriber<? super String> subscriber) {
             String d = data[2];
-            printLog(tvLogs, "", "----start check network data");
+            printLog(tvLogs, "", "----start check network data. value is null? " + (d == null));
             if (d != null) {
                 subscriber.onNext(d);
             }
@@ -97,12 +100,12 @@ public class CheckCacheFragment extends BaseFragment {
                                 return s != null;
                             }
                         })
-                         //.subscribeOn(Schedulers.io())
+                                //.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<String>() {
                             @Override
                             public void call(String s) {
-                                printLog(tvLogs, "get data from ", s);
+                                printLog(tvLogs, "Getting data from ", s);
                             }
                         }, new Action1<Throwable>() {
                             @Override

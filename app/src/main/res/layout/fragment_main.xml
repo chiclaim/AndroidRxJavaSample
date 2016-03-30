@@ -83,15 +83,12 @@
             android:text="Observable DependenceOn Other Observable"
             android:textAllCaps="false"/>
 
-
-
         <Button
-            android:id="@+id/btn_check_cache"
+            android:id="@+id/btn_multiple_observables"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Check data cache"
+            android:text="Check data cache[Multiple Observables]"
             android:textAllCaps="false"/>
-
 
         <!-- load data from multiple sources -->
 
