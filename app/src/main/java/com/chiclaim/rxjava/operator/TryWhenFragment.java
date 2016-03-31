@@ -50,6 +50,7 @@ public class TryWhenFragment extends BaseFragment {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.btn_operator:
+                tvLogs.setText("");
                 userApi.getUserInfo1()
                         .retryWhen(new RetryWithDelay(3, 2000))
                         .observeOn(AndroidSchedulers.mainThread())
@@ -65,8 +66,6 @@ public class TryWhenFragment extends BaseFragment {
                                 throwable.printStackTrace();
                             }
                         });
-
-
         }
     }
 
