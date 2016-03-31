@@ -15,5 +15,7 @@ public interface UserApi {
     @GET("/userinfo")
     Observable<Response> getUserInfo();
 
-
+    //wrong path
+    @GET("/userinfo1")
+    Observable<Response> getUserInfo1();
 }

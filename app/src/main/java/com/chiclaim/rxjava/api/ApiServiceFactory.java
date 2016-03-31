@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.chiclaim.rxjava.exception.AccessDenyException;
 import com.chiclaim.rxjava.exception.ConversionException;
+import com.chiclaim.rxjava.exception.NetworkException;
 import com.chiclaim.rxjava.exception.UnKnowException;
 
 import retrofit.ErrorHandler;
@@ -37,7 +38,7 @@ public class ApiServiceFactory {
                 return new AccessDenyException(error.getMessage());
             } else if (error.getKind() == RetrofitError.Kind.NETWORK) {
                 Log.e("ErrorHandler", "---------> An IOException occurred while communicating to the server");
-                //return new NetworkException(cause.getMessage());
+                return new NetworkException(error.getMessage());
             } else if (error.getKind() == RetrofitError.Kind.HTTP) {
                 Log.e("ErrorHandler", "---------> A non-200 HTTP status code was received from the server");
                 //return new Non200HttpException(cause.getMessage());

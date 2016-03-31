@@ -96,7 +96,7 @@ public class HttpWithTokenFragment extends BaseFragment {
         appendText(tvLogs, "start to request user info");
         loading = true;
         Observable<Response> observable = userApi.getUserInfo();
-        observable.onErrorResumeNext(refreshTokenAndRetry(observable))
+        observable.onErrorResumeNext(refreshTokenAndRetry(observable))//also use retryWhen to implement it
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response>() {

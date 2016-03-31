@@ -90,7 +90,13 @@
             android:text="Check data cache[Multiple Observables]"
             android:textAllCaps="false"/>
 
-        <!-- load data from multiple sources -->
+        <Button
+            android:id="@+id/btn_retry_when_http_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Retry When HTTP request error"
+            android:textAllCaps="false"/>
+
 
     </LinearLayout>
 </ScrollView>
