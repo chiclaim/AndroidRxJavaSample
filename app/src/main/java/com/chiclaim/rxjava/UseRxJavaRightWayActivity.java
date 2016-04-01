@@ -50,6 +50,7 @@ public class UseRxJavaRightWayActivity extends AppCompatActivity {
                 });
 
         compositeSubscription.add(subscriptionForUser);
+
     }
 
     public static void launch(Context context) {
