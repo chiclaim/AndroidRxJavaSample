@@ -3,6 +3,8 @@ package com.chiclaim.rxjava;
 import android.app.Application;
 import android.os.StrictMode;
 
+import com.squareup.leakcanary.LeakCanary;
+
 /**
  * Created by chiclaim on 2016/03/25
  */
@@ -22,5 +24,7 @@ public class MyApplication extends Application {
                 .penaltyDeath()
                 .build());
         super.onCreate();
+
+        LeakCanary.install(this);
     }
 }

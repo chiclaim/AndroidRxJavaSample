@@ -97,6 +97,12 @@
             android:text="Retry When HTTP request error"
             android:textAllCaps="false"/>
 
+        <Button
+            android:id="@+id/btn_use_rxjava_in_right_way"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Use RxJava in A Right Way"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 </ScrollView>

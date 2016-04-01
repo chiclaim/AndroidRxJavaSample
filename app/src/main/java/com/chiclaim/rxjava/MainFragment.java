@@ -37,6 +37,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.btn_observable_dependence_on_other_observable).setOnClickListener(this);
         view.findViewById(R.id.btn_multiple_observables).setOnClickListener(this);
         view.findViewById(R.id.btn_retry_when_http_error).setOnClickListener(this);
+        view.findViewById(R.id.btn_use_rxjava_in_right_way).setOnClickListener(this);
     }
 
 
@@ -69,6 +70,9 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_retry_when_http_error:
                 addFragment(new TryWhenFragment());
+                break;
+            case R.id.btn_use_rxjava_in_right_way:
+                UseRxJavaRightWayActivity.launch(getActivity());
                 break;
         }
     }
