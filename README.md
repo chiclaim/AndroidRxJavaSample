@@ -35,7 +35,7 @@ Almost all of the app has a search function.  We used to do this with addTextCha
 
 
 
-Unfortunately, RxJava canot fix this problem comletely. We can use  `debounce` operator to reduce the occurrence of this kind of problem. For example, if user enter 'AB' to the edittext, it will product a http request and the server is processing.  At this very moment, user enter 'C' character in the input. It will product another http request with key word 'ABC'.  if 'ABC' request is faster than 'AB' request. The outcome of 'ABC' http request will be overrided by 'AB' http request.
+Unfortunately, RxJava canot fix this problem completely. We can use  `debounce` operator to reduce the occurrence of this kind of problem. For example, if user enter 'AB' to the edittext, it will product a http request and the server is processing.  At this very moment, user enter 'C' character in the input. It will product another http request with key word 'ABC'.  if 'ABC' request is faster than 'AB' request. The outcome of 'ABC' http request will be overrided by 'AB' http request.
 
 
 
@@ -66,8 +66,8 @@ We start a http request may get a error when server is starting or device wifi i
 We can set retry parameter like  `times`  and  `delay`. 
 
 
-
-
+### 7. Using RxJava in a right way
+Avoid leak memory in android 
 
 ## Reference documents
 
