@@ -3,8 +3,8 @@
 ## Using RxJava in many usage scenarios of Android
 
 This sample demonstrates how to use  `rxjava in real business logic of android `  and  `common rxjava operators`.
-I use local server with tomcat  to simulate real development [retrofit uses it].  you can download server code from github.
-[server code](https://github.com/chiclaim/android_mvvm_server)
+I use local server with tomcat  to simulate real development [[retrofit](http://square.github.io/retrofit/) uses it].  
+you can download server code from github. [server code](https://github.com/chiclaim/android_mvvm_server)
 
 
 ##Example Details
@@ -31,11 +31,11 @@ Almost all of the app has a search function.  We used to do this with addTextCha
 
 * Comsuming user mobile traffic with many insignificant http request.
 
-*  Outcome of the search is a trick. For example, user search key is 'AB' , it will cause two http request .  One http reqeust with search key 'A' , one with search key 'AB' . if request 'AB' is faster than reqeust 'A', the outcome of request 'A' will be overrided by the outcome of 'AB'.  It's a trick.  
+*  Outcome of the search is a trick. For example, user search key is 'AB' , it will cause two http request .  One http reqeust with search key 'A' , one with search key 'AB' . if request 'AB' is faster than reqeust 'A', the outcome of request 'A' will be replaced by the outcome of 'AB'.  It's a trick.  
 
 
 
-Unfortunately, RxJava canot fix this problem completely. We can use  `debounce` operator to reduce the occurrence of this kind of problem. For example, if user enter 'AB' to the edittext, it will product a http request and the server is processing.  At this very moment, user enter 'C' character in the input. It will product another http request with key word 'ABC'.  if 'ABC' request is faster than 'AB' request. The outcome of 'ABC' http request will be overrided by 'AB' http request.
+Unfortunately, RxJava canot fix this problem completely. We can use  `debounce` operator to reduce the occurrence of this kind of problem. For example, if user enter 'AB' to the edittext, it will product a http request and the server is processing.  At this very moment, user enter 'C' character in the input. It will product another http request with key word 'ABC'.  if 'ABC' request is faster than 'AB' request. The outcome of 'ABC' http request will be replaced by outcome of 'AB' http request.
 
 
 
