@@ -1,5 +1,3 @@
-## [查看中文文档]()
-
 ## Using RxJava in many usage scenarios of Android
 
 This sample demonstrates how to use  `rxjava in real business logic of android `  and  `common rxjava operators`.
