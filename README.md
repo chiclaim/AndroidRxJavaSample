@@ -1,4 +1,4 @@
-## [查看中文文档]()
+## [查看中文文档](https://github.com/chiclaim/awesome_android_rxjava/blob/master/README_CN.md)
 
 ## Using RxJava in many usage scenarios of Android
 
