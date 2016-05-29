@@ -5,9 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chiclaim.rxjava.BaseFragment;
 import com.chiclaim.rxjava.R;
@@ -46,15 +44,17 @@ public class CreateOperatorFragment extends BaseFragment {
 
 
     private void observableCreate() {
-        Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                for (int i = 0; i < 5; i++) {
-                    printLog(tvLogs, "Emit Data:", i + "");
-                    subscriber.onNext("" + i);
-                }
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
+        Observable
+                .create(new Observable.OnSubscribe<String>() {
+                    @Override
+                    public void call(Subscriber<? super String> subscriber) {
+                        for (int i = 0; i < 5; i++) {
+                            printLog(tvLogs, "Emit Data:", i + "");
+                            subscriber.onNext("" + i);
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(new Action1<String>() {
             @Override
             public void call(String s) {

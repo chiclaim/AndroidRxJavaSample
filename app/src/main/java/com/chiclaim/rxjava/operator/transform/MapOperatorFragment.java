@@ -62,7 +62,7 @@ public class MapOperatorFragment extends BaseFragment {
 
     private Observable<String> processUrlsIpByMap() {
         return Observable.just(
-                "1http://www.baidu.com/",//invalid url
+                "http://www.baidu.com/",//invalid url
                 "http://www.google.com/",
                 "https://www.bing.com/")
                 .map(new Func1<String, String>() {
@@ -70,7 +70,7 @@ public class MapOperatorFragment extends BaseFragment {
                     public String call(String s) {
                         try {
                             // if occur a exception how to notify to subscriber? you can use flatMap
-                            return getIPByUrl(s);
+                            return s + " : " + getIPByUrl(s);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         } catch (UnknownHostException e) {
@@ -103,21 +103,24 @@ public class MapOperatorFragment extends BaseFragment {
 
 
     private void observableMap() {
-        Observable<String> sentenceObservable = Observable.from(new String[]{"This", "is", "RxJava"});
-        sentenceObservable.map(new Func1<String, String>() {
-            @Override
-            public String call(String s) {
-                printLog(tvLogs, "Transform Data ToLowerCase: ", s);
-                return s.toLowerCase();
-            }
-        }).toList().map(new Func1<List<String>, List<String>>() {
-            @Override
-            public List<String> call(List<String> strings) {
-                printLog(tvLogs, "Transform Data Reverse List: ", strings.toString());
-                Collections.reverse(strings);
-                return strings;
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
+        Observable.from(new String[]{"This", "is", "RxJava"})
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String s) {
+                        printLog(tvLogs, "Transform Data toUpperCase: ", s);
+                        return s.toUpperCase();
+                    }
+                })
+                .toList()
+                .map(new Func1<List<String>, List<String>>() {
+                    @Override
+                    public List<String> call(List<String> strings) {
+                        printLog(tvLogs, "Transform Data Reverse List: ", strings.toString());
+                        Collections.reverse(strings);
+                        return strings;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Action1<List<String>>() {
                     @Override
