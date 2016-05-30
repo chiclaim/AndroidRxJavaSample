@@ -15,6 +15,10 @@ public interface UserApi {
     @GET("/userinfo")
     Observable<Response> getUserInfo();
 
+
+    @GET("/userinfo?noToken=1")
+    Observable<Response> getUserInfoNoToken();
+
     //wrong path
     @GET("/userinfo1")
     Observable<Response> getUserInfo1();

@@ -119,9 +119,9 @@ public class FlatMapOperatorFragment extends BaseFragment {
      */
     private void observableFlatMap() {
         //==============把ip作为list返回
-        returnIpByList();
+        //returnIpByList();
         //===============单个的返回
-        //returnIpOneByOne();
+        returnIpOneByOne();
 
         //@TODO 如果某个url获取ip失败,该url之后的url都不会去获取ip了.原因(官方注释):
         //If the Observable calls this method (onError), it will not thereafter call onNext or onCompleted.
@@ -147,7 +147,7 @@ public class FlatMapOperatorFragment extends BaseFragment {
                 try {
                     String ip = getIPByUrl(url);
                     subscriber.onNext(ip);
-                    printLog(tvLogs, "Emit Data -> ", ip);
+                    printLog(tvLogs, "Emit Data -> ", url + " : " + ip);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                     //subscriber.onError(e);
@@ -159,7 +159,8 @@ public class FlatMapOperatorFragment extends BaseFragment {
                 }
                 subscriber.onCompleted();
             }
-        });
+        })
+        .subscribeOn(Schedulers.io());
         //.subscribeOn(Schedulers.io()) 注意该方法在这里调用和放在使用该Observable的地方调 产生不同的影响
         //把注释去掉会使用不同的线程去执行,放在放在使用该Observable的地方调会共用一个线程去执行
     }

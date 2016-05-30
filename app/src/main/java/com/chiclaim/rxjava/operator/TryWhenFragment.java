@@ -2,7 +2,6 @@ package com.chiclaim.rxjava.operator;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import com.chiclaim.rxjava.api.UserApi;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -51,14 +51,15 @@ public class TryWhenFragment extends BaseFragment {
         switch (v.getId()) {
             case R.id.btn_operator:
                 tvLogs.setText("");
-                userApi.getUserInfo1()
-                        .retryWhen(new RetryWithDelay(3, 2000))
+                userApi.getUserInfoNoToken()
+                        .retryWhen(new RetryWithDelay(3, 3000))
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(new Action1<Response>() {
                             @Override
                             public void call(Response response) {
-                                Log.d("Action1", response + "");
+                                String content = new String(((TypedByteArray) response.getBody()).getBytes());
+                                printLog(tvLogs, "", content);
                             }
                         }, new Action1<Throwable>() {
                             @Override
@@ -76,7 +77,7 @@ public class TryWhenFragment extends BaseFragment {
         private final int retryDelayMillis;
         private int retryCount;
 
-        public RetryWithDelay(final int maxRetries, final int retryDelayMillis) {
+        public RetryWithDelay(int maxRetries, int retryDelayMillis) {
             this.maxRetries = maxRetries;
             this.retryDelayMillis = retryDelayMillis;
             this.retryCount = 0;
@@ -89,14 +90,12 @@ public class TryWhenFragment extends BaseFragment {
                         @Override
                         public Observable<?> call(Throwable throwable) {
                             if (++retryCount <= maxRetries) {
-                                // When this Observable calls onNext, the original
-                                // Observable will be retried (i.e. re-subscribed).
-                                printLog(tvLogs, "", "get error, " + throwable.getMessage()
-                                        + "retry again " + retryCount);
+                                // When this Observable calls onNext, the original Observable will be retried (i.e. re-subscribed).
+                                printLog(tvLogs, "", "get error, it will try after " + retryDelayMillis
+                                        + " millisecond, retry count " + retryCount);
                                 return Observable.timer(retryDelayMillis,
                                         TimeUnit.MILLISECONDS);
                             }
-
                             // Max retries hit. Just pass the error along.
                             return Observable.error(throwable);
                         }

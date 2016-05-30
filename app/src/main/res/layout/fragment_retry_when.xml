@@ -22,7 +22,8 @@
         <TextView
             android:id="@+id/tv_logs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
             android:textSize="12sp"/>
     </ScrollView>
 
@@ -33,7 +34,7 @@
         android:layout_height="50dp"
         android:background="@android:color/darker_gray"
         android:gravity="center"
-        android:text="Observable Operator FlatMap"
+        android:text="Observable tryWhen operator"
         android:textAllCaps="false"/>
 
 
