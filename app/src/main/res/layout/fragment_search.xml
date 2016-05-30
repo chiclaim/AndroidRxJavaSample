@@ -5,10 +5,18 @@
               android:background="@android:color/white"
               android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="You can input `Apple, Blank, Cheese, Denstiny, Eason...`"
+        android:textColor="@android:color/black"/>
+
     <EditText
         android:id="@+id/et_key"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Input Keyword"/>
 
     <TextView
