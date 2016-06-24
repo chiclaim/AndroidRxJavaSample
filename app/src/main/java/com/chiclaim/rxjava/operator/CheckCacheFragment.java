@@ -84,6 +84,7 @@ public class CheckCacheFragment extends BaseFragment {
     }).subscribeOn(Schedulers.io());
 
 
+
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -100,7 +101,6 @@ public class CheckCacheFragment extends BaseFragment {
                                 return s != null;
                             }
                         })
-                                //.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<String>() {
                             @Override

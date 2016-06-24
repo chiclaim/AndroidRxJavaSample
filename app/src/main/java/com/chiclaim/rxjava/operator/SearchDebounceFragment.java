@@ -3,7 +3,6 @@ package com.chiclaim.rxjava.operator;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,28 +67,55 @@ public class SearchDebounceFragment extends BaseFragment {
 
 
         subscription = RxTextView.textChanges(etKey)
+                // 对etKey[EditText]的监听操作 需要在主线程操作
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .debounce(400, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
-                .subscribeOn(AndroidSchedulers.mainThread())// 对etKey[EditText]的监听操作 需要在主线程操作
+                //对应用输入的关键字进行过滤
                 .filter(new Func1<CharSequence, Boolean>() {
                     @Override
                     public Boolean call(CharSequence charSequence) {
-                        Log.d("RxJava", "filter is main thread : " + (Looper.getMainLooper() == Looper.myLooper()));
+                        tvContent.setText("");
+                        appendText(tvContent, "filter is main thread : " + (Looper.getMainLooper() == Looper.myLooper()));
                         return charSequence.toString().trim().length() > 0;
                     }
                 })
                 .switchMap(new Func1<CharSequence, Observable<List<String>>>() {
                     @Override
                     public Observable<List<String>> call(CharSequence charSequence) {
-                        Log.d("RxJava", getMainText("switchMap"));
-                        return searchApi.search(charSequence.toString());
+                        appendText(tvContent, "switchMap is main thread : " + (Looper.getMainLooper() == Looper.myLooper()));
+                        return searchApi.search(charSequence.toString()).flatMap(new Func1<List<String>, Observable<List<String>>>() {
+                            @Override
+                            public Observable<List<String>> call(List<String> strings) {
+                                //测试searchApi.search是不是默认在子线程中执行.
+                                appendText(tvContent, "switchMap flatMap transform : " + (Looper.getMainLooper() == Looper.myLooper()));
+                                return Observable.just(strings);
+                            }
+                        });
                     }
                 })
+                //@TODO 无法使得switchMap在子线程中执行, 待查明???
                 .subscribeOn(Schedulers.io())
+//                .flatMap(new Func1<List<String>, Observable<String>>() {
+//                    @Override
+//                    public Observable<String> call(List<String> strings) {
+//                        appendText(tvContent, "flatMap transform : " + (Looper.getMainLooper() == Looper.myLooper()));
+//                        return Observable.from(strings);
+//                    }
+//                })
+//                .filter(new Func1<String, Boolean>() {
+//                    @Override
+//                    public Boolean call(String s) {
+//                        //appendText(tvContent, s + " length > 3: " + (s.length() > 3) + " thread: " + (Looper.getMainLooper() == Looper.myLooper()));
+//                        return s.length() > 3;
+//                    }
+//                })
+                //.toList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<String>>() {
                     @Override
                     public void call(List<String> strings) {
-                        tvContent.setText("search result:\n\n");
+                        appendText(tvContent, "subscribe call is main thread : " + (Looper.getMainLooper() == Looper.myLooper()));
+                        tvContent.append("\n\nsearch result:\n\n ");
                         tvContent.append(strings.toString());
                     }
                 }, new Action1<Throwable>() {
@@ -99,7 +125,6 @@ public class SearchDebounceFragment extends BaseFragment {
                         tvContent.append("Error:" + throwable.getMessage());
                     }
                 });
-
         //flatMap和switchMap的区别
     }
 
