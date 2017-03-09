@@ -98,6 +98,13 @@
             android:textAllCaps="false"/>
 
         <Button
+            android:id="@+id/btn_combine_latest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Use Operator CombineLatest"
+            android:textAllCaps="false"/>
+
+        <Button
             android:id="@+id/btn_use_rxjava_in_right_way"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

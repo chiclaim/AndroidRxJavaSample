@@ -19,8 +19,9 @@ public class ApiServiceFactory {
 
     //server source code please see:
     //    https://github.com/chiclaim/android_mvvm_server
-    private static final String BASE_URL = "http://192.168.1.110:8080/AndroidMvvmServer";
+    private static final String BASE_URL = "http://10.1.67.34:8080/android_mvvm_server";
 //    private static final String BASE_URL = "http://192.168.2.106:8080/AndroidMvvmServer";
+    //http://10.1.67.34:8080/android_mvvm_server
 
     private static RequestInterceptor requestInterceptor = new RequestInterceptor() {
         @Override
