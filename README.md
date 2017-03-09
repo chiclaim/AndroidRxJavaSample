@@ -18,6 +18,9 @@
 
 [《九、RxJava zip操作符在Android中的实际使用场景》](http://blog.csdn.net/johnny901114/article/details/51614927)
 
+[《十、switchIfEmpty操作符实现Android检查本地缓存逻辑判断》](http://blog.csdn.net/johnny901114/article/details/52585912)
+
+[《十一、defer操作符实现代码支持链式调用》](http://blog.csdn.net/johnny901114/article/details/51614927)
 
 ## [查看中文文档](https://github.com/chiclaim/awesome_android_rxjava/blob/master/README_CN.md)
 
