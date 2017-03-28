@@ -1,3 +1,9 @@
+## Deprecated   
+停止维护，已经迁移到 [android-sample](https://github.com/chiclaim/android-sample)
+
+
+---
+
 > RxJava 系列文章
 
 [《一、RxJava create操作符的用法和源码分析》](http://blog.csdn.net/johnny901114/article/details/51524470)
