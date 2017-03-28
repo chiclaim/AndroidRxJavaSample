@@ -1,4 +1,4 @@
-## Deprecated   
+# Deprecated   
 停止维护，已经迁移到 [android-sample](https://github.com/chiclaim/android-sample)
 
 
@@ -30,6 +30,6 @@
 
 [《十二、combineLatest操作符的高级使用》](http://blog.csdn.net/johnny901114/article/details/61191723)
 
-
+[《十三、RxJava导致Fragment Activity内存泄漏问题》](http://blog.csdn.net/johnny901114/article/details/67640594)
 
 
