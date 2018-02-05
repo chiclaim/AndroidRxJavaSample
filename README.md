@@ -1,5 +1,5 @@
 # Deprecated   
-停止维护，已经迁移到 [android-sample](https://github.com/chiclaim/android-sample)
+停止维护，已经迁移到 [AndroidAll](https://github.com/chiclaim/AndroidAll)
 
 
 ---
